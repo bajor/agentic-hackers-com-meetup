@@ -14,24 +14,28 @@ layout: default
   <span class="cmd">cat about.txt</span>
 </div>
 <div class="line output">Building the future with AI agents.</div>
-<div class="line output">A community of builders. We meet, share projects, learn from each other.</div>
+<div class="line output">A community of builders. We meet, share projects, learn.</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
-  <span class="cmd">cat links.json</span>
+  <span class="cmd">ls links/</span>
 </div>
-<div class="line output">{</div>
-<div class="line output">  "meetup": "<a href="https://meetup.com/YOUR-MEETUP-URL">https://meetup.com/agentic-hackers</a>",</div>
-<div class="line output">  "discord": "<a href="https://discord.gg/YOUR-DISCORD-INVITE">https://discord.gg/agentic-hackers</a>"</div>
-<div class="line output">}</div>
+<div class="line output selectable"><span class="dir">meetup</span>  →  <a href="https://meetup.com/YOUR-MEETUP-URL">meetup.com/agentic-hackers</a></div>
+<div class="line output selectable"><span class="dir">discord</span> →  <a href="https://discord.gg/YOUR-DISCORD-INVITE">discord.gg/agentic-hackers</a></div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
   <span class="cmd">ls talks/</span>
 </div>
-<div class="line output"><span class="dir">coming-soon/</span></div>
+<div class="line output selectable"><span class="dir">coming-soon</span></div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
   <span class="cursor"></span>
+</div>
+
+<div class="help">
+  <span><kbd>j</kbd><kbd>k</kbd> navigate</span>
+  <span><kbd>y</kbd> yank link</span>
+  <span><kbd>Enter</kbd> open</span>
 </div>

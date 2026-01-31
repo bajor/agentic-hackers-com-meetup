@@ -135,6 +135,63 @@
       border-top: 1px solid #333;
     }
 
+    .selectable {
+      padding: 4px 8px;
+      margin: 2px -8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .selectable:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .selectable.selected {
+      background: rgba(0,255,136,0.15);
+      box-shadow: inset 3px 0 0 #00ff88;
+    }
+
+    #notice {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #00ff88;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #notice.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .help {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid #333;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .help span {
+      margin-right: 16px;
+    }
+
+    .help kbd {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #888;
+    }
+
     @media (max-width: 600px) {
       .terminal-wrapper { padding: 0; }
       .terminal { border-radius: 0; }
@@ -145,16 +202,69 @@
 </head>
 <body>
   <script>
+    let selectedIndex = 0;
+    const getSelectables = () => document.querySelectorAll('.selectable');
+
+    function updateSelection() {
+      const items = getSelectables();
+      items.forEach((el, i) => {
+        el.classList.toggle('selected', i === selectedIndex);
+      });
+      items[selectedIndex]?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showNotice('Yanked: ' + text);
+      });
+    }
+
+    function showNotice(msg) {
+      let notice = document.getElementById('notice');
+      if (!notice) {
+        notice = document.createElement('div');
+        notice.id = 'notice';
+        document.body.appendChild(notice);
+      }
+      notice.textContent = msg;
+      notice.classList.add('show');
+      setTimeout(() => notice.classList.remove('show'), 2000);
+    }
+
     document.addEventListener('keydown', (e) => {
+      const items = getSelectables();
       const step = 60;
+
       switch(e.key) {
-        case 'j': case 'ArrowDown': window.scrollBy(0, step); break;
-        case 'k': case 'ArrowUp': window.scrollBy(0, -step); break;
-        case 'h': case 'ArrowLeft': window.scrollBy(-step, 0); break;
-        case 'l': case 'ArrowRight': window.scrollBy(step, 0); break;
-        case 'g': if (e.shiftKey) window.scrollTo(0, document.body.scrollHeight); else window.scrollTo(0, 0); break;
+        case 'j': case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+          updateSelection();
+          break;
+        case 'k': case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, 0);
+          updateSelection();
+          break;
+        case 'y':
+          const selected = items[selectedIndex];
+          const link = selected?.querySelector('a');
+          if (link) copyToClipboard(link.href);
+          else if (selected) copyToClipboard(selected.textContent);
+          break;
+        case 'Enter':
+          const activeLink = items[selectedIndex]?.querySelector('a');
+          if (activeLink) window.open(activeLink.href, '_blank');
+          break;
+        case 'g':
+          if (e.shiftKey) { selectedIndex = items.length - 1; }
+          else { selectedIndex = 0; }
+          updateSelection();
+          break;
       }
     });
+
+    document.addEventListener('DOMContentLoaded', updateSelection);
   </script>
   <div class="terminal-wrapper">
     <div class="terminal">
