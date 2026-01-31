@@ -7,51 +7,82 @@
   <meta name="description" content="{{ site.description }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0c0c0c;
+      --bg-elevated: #161616;
+      --bg-hover: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #fafafa;
+      --text-secondary: #888;
+      --accent: #00ff88;
+      --accent-dim: rgba(0, 255, 136, 0.1);
+      --meetup: #f64060;
+      --discord: #5865f2;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 18px;
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-size: 17px;
       line-height: 1.6;
-      color: #1a1a1a;
-      background: #fff;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 4rem 2rem;
     }
 
     /* Hero */
     .hero {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      margin-bottom: 0.25rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .tagline {
-      font-size: 1.2rem;
-      color: #666;
-      margin-bottom: 2rem;
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
     }
 
+    /* Hero image */
     .hero-image {
-      margin-bottom: 2rem;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .hero-image img {
       width: 100%;
-      height: auto;
+      border-radius: 16px;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border);
       display: block;
     }
 
@@ -66,31 +97,38 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 500;
+      gap: 0.6rem;
+      padding: 1rem 1.75rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
       text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.2s;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
     }
 
-    .btn-primary {
-      background: #E51937;
+    .btn-meetup {
+      background: var(--meetup);
       color: white;
     }
 
-    .btn-primary:hover {
-      background: #c21530;
+    .btn-meetup:hover {
+      background: #e0354f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(246, 64, 96, 0.3);
     }
 
     .btn-discord {
-      background: #5865F2;
+      background: var(--discord);
       color: white;
     }
 
     .btn-discord:hover {
       background: #4752c4;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(88, 101, 242, 0.3);
     }
 
     .btn svg {
@@ -98,55 +136,122 @@
       height: 20px;
     }
 
-    /* Sections */
-    section {
-      padding: 2rem 0;
-      border-top: 1px solid #eee;
+    /* Cards */
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s;
     }
 
-    section h2 {
-      font-size: 1.25rem;
+    .card:hover {
+      border-color: #3a3a3a;
+    }
+
+    .card h2 {
+      font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
     }
 
-    section p {
-      color: #555;
+    .card p {
+      color: var(--text);
+      font-size: 1.1rem;
     }
 
     /* Talks */
     .talk {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .talk:last-child {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
-    .talk-date {
-      font-size: 0.9rem;
-      color: #888;
+    .talk-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .talk-title {
       font-weight: 500;
+      color: var(--text);
     }
 
-    .talk-speaker {
+    .talk-meta {
       font-size: 0.9rem;
-      color: #666;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Glow effect */
+    .glow {
+      position: fixed;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Grid pattern */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* Mobile */
     @media (max-width: 600px) {
       body { font-size: 16px; }
-      .hero h1 { font-size: 2rem; }
-      .container { padding: 2rem 1rem; }
+      .container { padding: 2rem 1.25rem; }
+      .hero h1 { font-size: 2.25rem; }
+      .card { padding: 1.5rem; }
+      .links { flex-direction: column; }
+      .btn { justify-content: center; }
     }
   </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
+  <div class="glow"></div>
   <div class="container">
     {{ content }}
   </div>
