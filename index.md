@@ -22,6 +22,10 @@ layout: default
 |_||_/_/ \_\___|_|\_\___|_|_\|___/
 </pre>
 
+<div class="hero-image">
+  <img src="/assets/images/meetup.avif" alt="Agentic Hackers meetup - people and robots hacking together">
+</div>
+
 <p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ cat welcome.txt</p>
 
 <p class="output">Building the future with AI agents.</p>
