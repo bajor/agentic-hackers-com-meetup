@@ -1,0 +1,8 @@
+title: Agentic Hackers
+description: Building the future with AI agents
+baseurl: ""
+url: "https://agentichackers.com"
+
+theme: minima
+
+markdown: kramdown
