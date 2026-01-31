@@ -2,54 +2,58 @@
 layout: default
 ---
 
-<div class="hero">
-  <h1>Agentic Hackers</h1>
-  <p class="tagline">Building the future with AI agents</p>
-  <div class="cta-buttons">
-    <a href="https://meetup.com/YOUR-MEETUP-URL" class="btn btn-primary">Join Meetup</a>
-    <a href="https://discord.gg/YOUR-DISCORD-INVITE" class="btn btn-secondary">Discord</a>
+<div class="terminal">
+  <div class="terminal-header">
+    <span class="terminal-btn red"></span>
+    <span class="terminal-btn yellow"></span>
+    <span class="terminal-btn green"></span>
+    <span class="terminal-title">agentic-hackers — zsh</span>
   </div>
-</div>
+  <div class="terminal-body">
 
----
+<pre class="ascii-art">
+   _   ___ ___ _  _ _____ ___ ___
+  /_\ / __| __| \| |_   _|_ _/ __|
+ / _ \ (_ | _|| .` | | |  | | (__
+/_/ \_\___|___|_|\_| |_| |___\___|
+ _  _   _   ___ _  _____ ___  ___
+| || | /_\ / __| |/ / __| _ \/ __|
+| __ |/ _ \ (__| ' <| _||   /\__ \
+|_||_/_/ \_\___|_|\_\___|_|_\|___/
+</pre>
 
-## What We Do
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ cat welcome.txt</p>
 
-We're a community of builders exploring **autonomous AI agents**, LLM-powered tools, and agentic workflows.
+<p class="output">Building the future with AI agents.</p>
+<p class="output">A community of builders exploring autonomous AI agents,</p>
+<p class="output">LLM-powered tools, and agentic workflows.</p>
 
-<div class="features">
-  <div class="feature">
-    <h3>Build</h3>
-    <p>Hands-on projects with Claude, GPT, and open-source models</p>
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ ls ./what-we-do/</p>
+
+<p class="output"><span class="dir">build/</span>    Hands-on projects with Claude, GPT, and open-source models</p>
+<p class="output"><span class="dir">share/</span>    Demo nights, lightning talks, and war stories</p>
+<p class="output"><span class="dir">connect/</span>  Meet others pushing the boundaries of agents</p>
+
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ cat links.json</p>
+
+<pre class="output json">{
+  "meetup": "<a href="https://meetup.com/YOUR-MEETUP-URL">https://meetup.com/agentic-hackers</a>",
+  "discord": "<a href="https://discord.gg/YOUR-DISCORD-INVITE">https://discord.gg/agentic-hackers</a>"
+}</pre>
+
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ cat talks.log</p>
+
+<pre class="output">DATE          SPEAKER       TOPIC
+─────────────────────────────────────────────────
+Coming soon   TBD           TBD
+</pre>
+
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ echo "Join us"</p>
+
+<p class="output">Whether you're building your first agent or deploying at scale,</p>
+<p class="output">there's a place for you here.</p>
+
+<p class="prompt"><span class="user">guest@agentic</span>:<span class="path">~</span>$ <span class="cursor">█</span></p>
+
   </div>
-  <div class="feature">
-    <h3>Share</h3>
-    <p>Demo nights, lightning talks, and war stories from the trenches</p>
-  </div>
-  <div class="feature">
-    <h3>Connect</h3>
-    <p>Meet others pushing the boundaries of what agents can do</p>
-  </div>
-</div>
-
----
-
-## Upcoming Events
-
-Stay tuned for our next meetup. [Join us on Meetup](https://meetup.com/YOUR-MEETUP-URL) to get notified.
-
----
-
-## Past Talks
-
-| Date | Speaker | Topic | Links |
-|------|---------|-------|-------|
-| *Coming soon* | — | — | — |
-
----
-
-<div class="footer-cta">
-  <h2>Join the Community</h2>
-  <p>Whether you're building your first agent or deploying at scale, there's a place for you here.</p>
-  <a href="https://discord.gg/YOUR-DISCORD-INVITE" class="btn btn-primary">Join Discord</a>
 </div>
