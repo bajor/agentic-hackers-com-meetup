@@ -152,6 +152,11 @@
       box-shadow: inset 3px 0 0 #00ff88;
     }
 
+    .selectable.yanked {
+      background: rgba(255,255,136,0.4) !important;
+      transition: background 0s;
+    }
+
     #notice {
       position: fixed;
       bottom: 24px;
@@ -213,9 +218,13 @@
       items[selectedIndex]?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
-    function copyToClipboard(text) {
+    function copyToClipboard(text, element) {
       navigator.clipboard.writeText(text).then(() => {
         showNotice('Yanked: ' + text);
+        if (element) {
+          element.classList.add('yanked');
+          setTimeout(() => element.classList.remove('yanked'), 300);
+        }
       });
     }
 
@@ -249,8 +258,8 @@
         case 'y':
           const selected = items[selectedIndex];
           const link = selected?.querySelector('a');
-          if (link) copyToClipboard(link.href);
-          else if (selected) copyToClipboard(selected.textContent);
+          if (link) copyToClipboard(link.href, selected);
+          else if (selected) copyToClipboard(selected.textContent, selected);
           break;
         case 'Enter':
           const activeLink = items[selectedIndex]?.querySelector('a');
