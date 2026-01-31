@@ -30,53 +30,69 @@
     .terminal {
       width: 100%;
       max-width: 900px;
-      background: #1a1a1a;
-      border-radius: 12px;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.1),
-        0 50px 100px -20px rgba(0,0,0,0.8),
-        0 0 150px rgba(0,255,136,0.05);
+      background: #300a24;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       overflow: hidden;
+      border: 1px solid #4a4a4a;
     }
 
     .terminal-header {
-      background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-      padding: 14px 20px;
+      background: #303030;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
       border-bottom: 1px solid #1a1a1a;
     }
 
-    .terminal-btn {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
+    .terminal-title {
+      color: #ddd;
+      font-size: 13px;
+      font-weight: 500;
     }
 
-    .terminal-btn.red { background: #ff5f57; }
-    .terminal-btn.yellow { background: #febc2e; }
-    .terminal-btn.green { background: #28c840; }
+    .terminal-controls {
+      display: flex;
+      gap: 2px;
+    }
 
-    .terminal-title {
-      flex: 1;
-      text-align: center;
+    .terminal-btn {
+      width: 32px;
+      height: 28px;
+      background: transparent;
+      border: none;
       color: #888;
-      font-size: 13px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .terminal-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .terminal-btn.close:hover {
+      background: #e74c3c;
+      color: #fff;
     }
 
     .terminal-body {
-      padding: 32px;
-      color: #e0e0e0;
+      padding: 24px;
+      color: #eeeeec;
       min-height: 500px;
+      background: #300a24;
     }
 
     .ascii {
-      color: #00ff88;
+      color: #8ae234;
       font-size: 12px;
       line-height: 1.15;
       margin-bottom: 32px;
-      text-shadow: 0 0 20px rgba(0,255,136,0.4);
       white-space: pre;
     }
 
@@ -85,40 +101,41 @@
     }
 
     .prompt {
-      color: #00ff88;
+      color: #8ae234;
     }
 
     .prompt .path {
-      color: #00bfff;
+      color: #729fcf;
     }
 
     .cmd {
-      color: #fff;
+      color: #eeeeec;
     }
 
     .output {
-      color: #aaa;
+      color: #d3d7cf;
       margin-left: 0;
     }
 
     .output a {
-      color: #ffcc00;
-      text-decoration: none;
-    }
-
-    .output a:hover {
+      color: #729fcf;
       text-decoration: underline;
     }
 
+    .output a:hover {
+      color: #8ae234;
+    }
+
     .dir {
-      color: #00bfff;
+      color: #729fcf;
+      font-weight: bold;
     }
 
     .cursor {
       display: inline-block;
       width: 10px;
       height: 18px;
-      background: #00ff88;
+      background: #eeeeec;
       animation: blink 1s step-end infinite;
       vertical-align: middle;
       margin-left: 4px;
@@ -148,12 +165,12 @@
     }
 
     .selectable.selected {
-      background: rgba(0,255,136,0.15);
-      box-shadow: inset 3px 0 0 #00ff88;
+      background: rgba(138,226,52,0.2);
+      box-shadow: inset 3px 0 0 #8ae234;
     }
 
     .selectable.yanked {
-      background: rgba(255,255,136,0.4) !important;
+      background: rgba(252,233,79,0.4) !important;
       transition: background 0s;
     }
 
@@ -162,10 +179,10 @@
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: #00ff88;
-      color: #000;
+      background: #8ae234;
+      color: #2e3436;
       padding: 12px 24px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 14px;
       font-weight: 500;
       opacity: 0;
@@ -278,10 +295,12 @@
   <div class="terminal-wrapper">
     <div class="terminal">
       <div class="terminal-header">
-        <span class="terminal-btn red"></span>
-        <span class="terminal-btn yellow"></span>
-        <span class="terminal-btn green"></span>
-        <span class="terminal-title">agentic-hackers — zsh</span>
+        <span class="terminal-title">guest@agentic: ~</span>
+        <div class="terminal-controls">
+          <button class="terminal-btn">─</button>
+          <button class="terminal-btn">□</button>
+          <button class="terminal-btn close">✕</button>
+        </div>
       </div>
       <div class="terminal-body">
         {{ content }}
