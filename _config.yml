@@ -6,3 +6,10 @@ url: "https://agentichackers.com"
 theme: minima
 
 markdown: kramdown
+
+# Disable minima defaults we don't need
+header_pages: []
+show_excerpts: false
+
+minima:
+  skin: dark
