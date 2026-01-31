@@ -18,16 +18,22 @@ layout: default
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
-  <span class="cmd">ls links/</span>
+  <span class="cmd">cat links.md</span>
 </div>
-<div class="line output selectable"><span class="dir">meetup</span>  →  <a href="https://meetup.com/YOUR-MEETUP-URL">meetup.com/agentic-hackers</a></div>
-<div class="line output selectable"><span class="dir">discord</span> →  <a href="https://discord.gg/YOUR-DISCORD-INVITE">discord.gg/agentic-hackers</a></div>
+<div class="line output"># Links</div>
+<div class="line output"></div>
+<div class="line output selectable">- [Meetup](<a href="https://meetup.com/YOUR-MEETUP-URL">https://meetup.com/agentic-hackers</a>) - RSVP for events</div>
+<div class="line output selectable">- [Discord](<a href="https://discord.gg/YOUR-DISCORD-INVITE">https://discord.gg/agentic-hackers</a>) - Join the community</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
-  <span class="cmd">ls talks/</span>
+  <span class="cmd">cat talks.md</span>
 </div>
-<div class="line output selectable"><span class="dir">coming-soon</span></div>
+<div class="line output"># Talks</div>
+<div class="line output"></div>
+<div class="line output">| Talk | Speaker | GitHub |</div>
+<div class="line output">|------|---------|--------|</div>
+<div class="line output selectable">| Coming soon | TBD | <a href="https://github.com">github.com/tbd</a> |</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
