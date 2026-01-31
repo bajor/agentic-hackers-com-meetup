@@ -81,7 +81,9 @@ html, body {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.875rem 1.75rem;
   background: var(--accent);
   color: white !important;
@@ -93,6 +95,11 @@ html, body {
   &:hover {
     background: var(--accent-hover);
     text-decoration: none;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
   }
 }
 
