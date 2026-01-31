@@ -2,36 +2,36 @@
 layout: default
 ---
 
-<div class="hero">
-  <span class="badge">Meetup</span>
-  <h1>Agentic Hackers</h1>
-  <p class="tagline">Building with AI agents</p>
+<pre class="ascii">
+   _   ___ ___ _  _ _____ ___ ___   _  _   _   ___ _  _____ ___  ___
+  /_\ / __| __| \| |_   _|_ _/ __| | || | /_\ / __| |/ / __| _ \/ __|
+ / _ \ (_ | _|| .` | | |  | | (__  | __ |/ _ \ (__| ' <| _||   /\__ \
+/_/ \_\___|___|_|\_| |_| |___\___| |_||_/_/ \_\___|_|\_\___|_|_\|___/
+</pre>
 
-  <img src="/assets/images/meetup.avif" alt="Agentic Hackers meetup" class="hero-image">
-
-  <div class="links">
-    <a href="https://meetup.com/YOUR-MEETUP-URL" class="btn btn-meetup">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.98.555a.518.518 0 0 0-.105.011.53.53 0 1 0 .222 1.04.533.533 0 0 0 .409-.633.531.531 0 0 0-.526-.418zm6.455.638a.984.984 0 0 0-.465.122.99.99 0 1 0 .93 1.75.99.99 0 0 0 .411-1.34.99.99 0 0 0-.876-.532zm5.453.907a.529.529 0 0 0-.371.155.537.537 0 0 0 .012.758.54.54 0 0 0 .758-.014.536.536 0 0 0-.399-.899zm-6.077 1.063a3.741 3.741 0 0 0-1.446.283c-.47.19-.896.478-1.212.915-.053-.237-.132-.46-.262-.661a1.772 1.772 0 0 0-1.073-.781 2.496 2.496 0 0 0-.654-.087c-.209 0-.418.022-.621.063-.202.04-.397.1-.592.168a2.963 2.963 0 0 0-.927.587c-.073.067-.14.14-.21.212a1.326 1.326 0 0 0-.09-.138 1.764 1.764 0 0 0-1.073-.782 2.502 2.502 0 0 0-.654-.086c-.209 0-.418.022-.621.063-.202.04-.397.1-.592.168-.493.19-.944.5-1.256.939a2.387 2.387 0 0 0-.322.673c-.1.304-.152.628-.152.963 0 .593.163 1.14.435 1.612l5.073 8.7c.247.425.655.737 1.142.873.14.04.285.06.43.06.35 0 .69-.117.97-.337l.132-.104c.278.352.687.57 1.136.57.393 0 .768-.158 1.042-.438.143-.145.253-.316.328-.502.274.246.63.393 1.016.393.393 0 .768-.158 1.042-.438a1.463 1.463 0 0 0 .42-.933c.263.17.57.268.895.268.453 0 .876-.202 1.158-.549.021.013.038.028.06.04.078.044.156.09.242.127.26.114.557.175.873.175.215 0 .437-.03.654-.092a2.308 2.308 0 0 0 1.074-.66c.088-.098.172-.202.248-.314.096.063.192.124.296.176.26.114.557.175.873.175.215 0 .437-.03.654-.092a2.308 2.308 0 0 0 1.074-.66c.395-.44.633-1.04.633-1.703 0-.32-.053-.628-.147-.917a2.388 2.388 0 0 0-.313-.634 2.986 2.986 0 0 0-1.276-1.058 3.078 3.078 0 0 0-.592-.207 2.727 2.727 0 0 0-.621-.074c-.126 0-.248.009-.368.028a1.764 1.764 0 0 0-.757-.906 1.766 1.766 0 0 0-.96-.284c-.16 0-.318.021-.47.063a3.741 3.741 0 0 0-2.545-1.283 3.71 3.71 0 0 0-.399-.022z"/></svg>
-      Join Meetup
-    </a>
-    <a href="https://discord.gg/YOUR-DISCORD-INVITE" class="btn btn-discord">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-      Join Discord
-    </a>
-  </div>
+<div class="line">
+  <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
+  <span class="cmd">cat about.txt</span>
 </div>
+<div class="line output">Building the future with AI agents.</div>
+<div class="line output">A community of builders. We meet, share projects, learn from each other.</div>
 
-<div class="card">
-  <h2>About</h2>
-  <p>A community of builders working with AI agents. We meet, share projects, and learn from each other.</p>
+<div class="line" style="margin-top: 24px;">
+  <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
+  <span class="cmd">cat links.json</span>
 </div>
+<div class="line output">{</div>
+<div class="line output">  "meetup": "<a href="https://meetup.com/YOUR-MEETUP-URL">https://meetup.com/agentic-hackers</a>",</div>
+<div class="line output">  "discord": "<a href="https://discord.gg/YOUR-DISCORD-INVITE">https://discord.gg/agentic-hackers</a>"</div>
+<div class="line output">}</div>
 
-<div class="card">
-  <h2>Talks</h2>
-  <div class="talk">
-    <div class="talk-info">
-      <span class="talk-title">Coming soon</span>
-      <span class="talk-meta">TBD</span>
-    </div>
-  </div>
+<div class="line" style="margin-top: 24px;">
+  <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
+  <span class="cmd">ls talks/</span>
+</div>
+<div class="line output"><span class="dir">coming-soon/</span></div>
+
+<div class="line" style="margin-top: 24px;">
+  <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
+  <span class="cursor"></span>
 </div>
