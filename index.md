@@ -27,13 +27,14 @@ layout: default
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
-  <span class="cmd">cat talks.md</span>
+  <span class="cmd">glow talks.md</span>
 </div>
-<div class="line output"># Talks</div>
 <div class="line output"></div>
-<div class="line output">| Talk | Speaker | GitHub |</div>
-<div class="line output">|------|---------|--------|</div>
-<div class="line output selectable">| Coming soon | TBD | <a href="https://github.com">github.com/tbd</a> |</div>
+<div class="glow-table"><div class="line output">   Talk                  │ Speaker        │ GitHub</div>
+<div class="line output">  ───────────────────────┼────────────────┼──────────────────────────</div>
+<div class="line output selectable">   Building AI Agents    │ Jane Doe       │ <a href="https://github.com/janedoe">github.com/janedoe</a></div>
+<div class="line output selectable">   LLM Tool Integration  │ John Smith     │ <a href="https://github.com/johnsmith">github.com/johnsmith</a></div>
+</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
