@@ -212,6 +212,28 @@
       color: #888;
     }
 
+    .glow-table {
+      font-variant-ligatures: none;
+    }
+
+    .glow-row {
+      display: grid;
+      grid-template-columns: 200px 140px 1fr;
+    }
+
+    .glow-row span {
+      padding-left: 4px;
+    }
+
+    .glow-row span:not(:first-child)::before {
+      content: "│ ";
+      color: #d3d7cf;
+    }
+
+    .glow-sep {
+      color: #d3d7cf;
+    }
+
     @media (max-width: 600px) {
       .terminal-wrapper { padding: 0; }
       .terminal { border-radius: 0; }
