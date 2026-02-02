@@ -213,27 +213,16 @@
     }
 
     .glow-table {
+      white-space: pre;
       font-variant-ligatures: none;
-      margin: 4px 0;
     }
 
-    .glow-row.line {
-      display: grid !important;
-      grid-template-columns: 180px 120px 1fr;
-      margin-bottom: 2px;
+    .glow-table .line {
+      margin-bottom: 0;
     }
 
-    .glow-row span {
-      padding: 2px 8px;
-    }
-
-    .glow-row span:not(:first-child) {
-      border-left: 1px solid #888;
-    }
-
-    .glow-sep.line {
-      margin-bottom: 2px;
-      color: #888;
+    .glow-table a {
+      color: #729fcf;
     }
 
     @media (max-width: 600px) {

@@ -4,12 +4,10 @@ A community of builders working with AI agents.
 
 ## Adding Talks
 
-Edit `_data/talks.yml`:
+Edit `index.md` and add a row to the glow table (keep spacing aligned):
 
-```yaml
-- title: Your Talk Title
-  speaker: Speaker Name
-  github: github-username
+```
+<div class="line output selectable">   Your Talk Title       │ Speaker Name   │ <a href="https://github.com/username">github.com/username</a></div>
 ```
 
 ## Development

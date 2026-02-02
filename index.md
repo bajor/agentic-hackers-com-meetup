@@ -30,11 +30,11 @@ layout: default
   <span class="cmd">glow talks.md</span>
 </div>
 <div class="line output"></div>
-<div class="glow-table">
-<div class="line output glow-row"><span>Talk</span><span>Speaker</span><span>GitHub</span></div>
-<div class="line output glow-sep">────────────────────┼────────────────┼──────────────────────────</div>
-{% for talk in site.data.talks %}<div class="line output glow-row selectable"><span>{{ talk.title }}</span><span>{{ talk.speaker }}</span><span><a href="https://github.com/{{ talk.github }}">github.com/{{ talk.github }}</a></span></div>
-{% endfor %}</div>
+<div class="glow-table"><div class="line output">   Talk                  │ Speaker        │ GitHub</div>
+<div class="line output">  ───────────────────────┼────────────────┼──────────────────────────</div>
+<div class="line output selectable">   Building AI Agents    │ Jane Doe       │ <a href="https://github.com/janedoe">github.com/janedoe</a></div>
+<div class="line output selectable">   LLM Tool Integration  │ John Smith     │ <a href="https://github.com/johnsmith">github.com/johnsmith</a></div>
+</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>
