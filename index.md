@@ -31,16 +31,10 @@ layout: default
 </div>
 <div class="line output"></div>
 <div class="glow-table">
-  <div class="line output glow-row">
-    <span>Talk</span><span>Speaker</span><span>GitHub</span>
-  </div>
-  <div class="line output glow-sep">──────────────────────┼───────────────┼──────────────────────────</div>
-{% for talk in site.data.talks %}
-  <div class="line output glow-row selectable">
-    <span>{{ talk.title }}</span><span>{{ talk.speaker }}</span><span><a href="https://github.com/{{ talk.github }}">github.com/{{ talk.github }}</a></span>
-  </div>
-{% endfor %}
-</div>
+<div class="line output glow-row"><span>Talk</span><span>Speaker</span><span>GitHub</span></div>
+<div class="line output glow-sep">────────────────────┼────────────────┼──────────────────────────</div>
+{% for talk in site.data.talks %}<div class="line output glow-row selectable"><span>{{ talk.title }}</span><span>{{ talk.speaker }}</span><span><a href="https://github.com/{{ talk.github }}">github.com/{{ talk.github }}</a></span></div>
+{% endfor %}</div>
 
 <div class="line" style="margin-top: 24px;">
   <span class="prompt">guest@agentic<span class="path">:~</span>$</span>

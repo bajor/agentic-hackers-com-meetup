@@ -214,24 +214,26 @@
 
     .glow-table {
       font-variant-ligatures: none;
+      margin: 4px 0;
     }
 
-    .glow-row {
-      display: grid;
-      grid-template-columns: 200px 140px 1fr;
+    .glow-row.line {
+      display: grid !important;
+      grid-template-columns: 180px 120px 1fr;
+      margin-bottom: 2px;
     }
 
     .glow-row span {
-      padding-left: 4px;
+      padding: 2px 8px;
     }
 
-    .glow-row span:not(:first-child)::before {
-      content: "│ ";
-      color: #d3d7cf;
+    .glow-row span:not(:first-child) {
+      border-left: 1px solid #888;
     }
 
-    .glow-sep {
-      color: #d3d7cf;
+    .glow-sep.line {
+      margin-bottom: 2px;
+      color: #888;
     }
 
     @media (max-width: 600px) {
