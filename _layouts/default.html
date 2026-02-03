@@ -349,6 +349,9 @@
       if (!trimmed) return;
 
       terminalState.commandHistory.push(trimmed);
+      if (terminalState.commandHistory.length > 10) {
+        terminalState.commandHistory.shift();
+      }
       terminalState.historyIndex = terminalState.commandHistory.length;
 
       const parts = trimmed.split(/\s+/);
