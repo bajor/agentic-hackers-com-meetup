@@ -16,7 +16,7 @@ All content is in `_layouts/default.html` in the `FILE_CONTENTS` object. Edit th
 const FILE_CONTENTS = {
   "about.txt": "Your about text here",
   "links.md": "# Links\n\n- Link 1\n- Link 2",
-  "talks.md": "# Talks\n\n## Talk Title\n\nDescription\n[Speaker](url)",
+  "meetups.md": "# Talks\n\n## Talk Title\n\nDescription\n[Speaker](url)",
   // ... more files
 };
 ```
