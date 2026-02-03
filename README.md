@@ -1,8 +1,4 @@
-# Agentic Hackers
-
-A community of builders working with AI agents.
-
-**Feel free to create PRs to update content or add easter eggs!**
+# Feel free to create PRs to update content or add easter eggs!
 
 ## Development
 
