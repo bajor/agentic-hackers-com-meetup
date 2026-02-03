@@ -63,3 +63,4 @@ All configurable values are in `_layouts/default.html` in the `<script>` block.
 1. Add to `AVAILABLE_FILES`
 2. Add content to `FILE_CONTENTS`
 3. Don't add to `ACTIVE_FILES`
+
