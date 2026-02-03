@@ -85,6 +85,8 @@
       padding: 24px;
       color: #eeeeec;
       min-height: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
       background: #300a24;
     }
 
@@ -142,87 +144,42 @@
       background: #eeeeec;
       vertical-align: middle;
       margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .cursor.typing {
+      animation: none;
+      opacity: 1;
+    }
+
+    .user-input {
+      color: #eeeeec;
+      white-space: pre;
+    }
+
+    .cmd-output {
+      color: #d3d7cf;
+    }
+
+    .cmd-error {
+      color: #ef2929;
+    }
+
+    .file-item {
+      color: #8ae234;
+      display: inline-block;
+      margin-right: 24px;
     }
 
     .section {
       margin-top: 32px;
       padding-top: 24px;
       border-top: 1px solid #333;
-    }
-
-    .selectable {
-      padding: 4px 8px;
-      margin: 2px -8px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.1s;
-    }
-
-    .selectable:hover {
-      background: rgba(255,255,255,0.05);
-    }
-
-    .selectable.selected {
-      background: rgba(138,226,52,0.2);
-      box-shadow: inset 3px 0 0 #8ae234;
-    }
-
-    .selectable.yanked {
-      background: rgba(252,233,79,0.4) !important;
-      transition: background 0s;
-    }
-
-    #notice {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #8ae234;
-      color: #2e3436;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      opacity: 0;
-      transition: all 0.3s ease;
-      z-index: 1000;
-    }
-
-    #notice.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    .help {
-      margin-top: 32px;
-      padding-top: 16px;
-      border-top: 1px solid #333;
-      font-size: 12px;
-      color: #555;
-    }
-
-    .help span {
-      margin-right: 16px;
-    }
-
-    .help kbd {
-      background: #333;
-      padding: 2px 6px;
-      border-radius: 3px;
-      color: #888;
-    }
-
-    .glow-table {
-      white-space: pre;
-      font-variant-ligatures: none;
-    }
-
-    .glow-table .line {
-      margin-bottom: 0;
-    }
-
-    .glow-table a {
-      color: #729fcf;
     }
 
     @media (max-width: 600px) {
@@ -234,75 +191,6 @@
   </style>
 </head>
 <body>
-  <script>
-    let selectedIndex = 0;
-    const getSelectables = () => document.querySelectorAll('.selectable');
-
-    function updateSelection() {
-      const items = getSelectables();
-      items.forEach((el, i) => {
-        el.classList.toggle('selected', i === selectedIndex);
-      });
-      items[selectedIndex]?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
-
-    function copyToClipboard(text, element) {
-      navigator.clipboard.writeText(text).then(() => {
-        showNotice('Yanked: ' + text);
-        if (element) {
-          element.classList.add('yanked');
-          setTimeout(() => element.classList.remove('yanked'), 300);
-        }
-      });
-    }
-
-    function showNotice(msg) {
-      let notice = document.getElementById('notice');
-      if (!notice) {
-        notice = document.createElement('div');
-        notice.id = 'notice';
-        document.body.appendChild(notice);
-      }
-      notice.textContent = msg;
-      notice.classList.add('show');
-      setTimeout(() => notice.classList.remove('show'), 2000);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      const items = getSelectables();
-      const step = 60;
-
-      switch(e.key) {
-        case 'j': case 'ArrowDown':
-          e.preventDefault();
-          selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
-          updateSelection();
-          break;
-        case 'k': case 'ArrowUp':
-          e.preventDefault();
-          selectedIndex = Math.max(selectedIndex - 1, 0);
-          updateSelection();
-          break;
-        case 'y':
-          const selected = items[selectedIndex];
-          const link = selected?.querySelector('a');
-          if (link) copyToClipboard(link.href, selected);
-          else if (selected) copyToClipboard(selected.textContent, selected);
-          break;
-        case 'Enter':
-          const activeLink = items[selectedIndex]?.querySelector('a');
-          if (activeLink) window.open(activeLink.href, '_blank');
-          break;
-        case 'g':
-          if (e.shiftKey) { selectedIndex = items.length - 1; }
-          else { selectedIndex = 0; }
-          updateSelection();
-          break;
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', updateSelection);
-  </script>
   <div class="terminal-wrapper">
     <div class="terminal">
       <div class="terminal-header">
@@ -318,5 +206,292 @@
       </div>
     </div>
   </div>
+  <script>
+    /* ============================================
+       EASTER EGG CONFIGURATION - EDIT THESE VALUES
+       See README.md "Interactive Terminal Easter Egg" section
+       ============================================ */
+
+    // Random responses for unknown commands (README: UNKNOWN_COMMAND_RESPONSES)
+    const UNKNOWN_COMMAND_RESPONSES = [
+      "Command not found.",
+      "Hmm, I don't know that one.",
+      "Unknown command.",
+      "That's not in my vocabulary.",
+      "I'm just a simple terminal."
+    ];
+
+    // Files shown by 'ls' command - ACTIVE_FILES are shown on page load
+    // (README: AVAILABLE_FILES, ACTIVE_FILES)
+    const AVAILABLE_FILES = [
+      "about.txt",
+      "links.md",
+      "talks.md",
+      "plans.md",
+      "url"
+    ];
+
+    // Files to display on page load (in order)
+    const ACTIVE_FILES = ["about.txt", "links.md", "talks.md"];
+
+    // File contents - used for both page display and 'cat' command
+    // (README: FILE_CONTENTS)
+    const FILE_CONTENTS = {
+      "about.txt": "Building the future with AI agents.\nA community of builders. We meet on Discord.\nAny topic is welcome. Ping with your talk/presentation or debate topic and we'll organize another meetup.",
+      "links.md": "# Links\n\n- Discord: https://discord.gg/agentic-hackers - Join the community\n- Meetup: https://www.meetup.com/agentichackers/",
+      "talks.md": "# #1 Agentic Hackers - Coding with AI Without Getting Dumber (Discord)\n\nSaturday, Feb 28, 2026 · 3:00 PM\n\n---\n...",
+      "plans.md": "# DRAFT - Future Talks???\n\n## How to Mass Produce AI Slop (SPEEDRUN)\n- vibe coding at 3am\n- accept all suggestions no questions\n- ship it who cares\n\n## Prompt Engineering for Maximum Chaos\n- just keep adding \"be creative\" until it breaks\n- temperature 2.0 YOLO\n- the model is always right actually\n\n## Building Agents That Build Agents That Build Agents\n- recursive slop generation\n- infinite content farm\n- we are so back",
+      "url": "github.com/bajor/agentic-hackers-com-meetup"
+    };
+
+    /* ============================================
+       END CONFIGURATION
+       ============================================ */
+
+    // Terminal state
+    const terminalState = {
+      inputMode: false,
+      currentInput: '',
+      commandHistory: [],
+      historyIndex: -1
+    };
+
+    // DOM elements
+    let terminalBody, cursorElement, inputSpan;
+
+    function initTerminal() {
+      terminalBody = document.querySelector('.terminal-body');
+      cursorElement = document.querySelector('.cursor');
+
+      // Create input span next to cursor if not exists
+      const inputLine = document.querySelector('.input-line');
+      if (inputLine && cursorElement) {
+        inputSpan = inputLine.querySelector('.user-input');
+        if (!inputSpan) {
+          inputSpan = document.createElement('span');
+          inputSpan.className = 'user-input';
+          cursorElement.parentNode.insertBefore(inputSpan, cursorElement);
+        }
+      }
+
+      // Render initial content from ACTIVE_FILES
+      renderInitialContent();
+    }
+
+    function renderInitialContent() {
+      const inputLine = document.querySelector('.input-line');
+      const contentArea = document.getElementById('dynamic-content');
+      if (!contentArea || !inputLine) return;
+
+      ACTIVE_FILES.forEach(filename => {
+        const content = FILE_CONTENTS[filename];
+        if (!content) return;
+
+        // Create command line
+        const cmdLine = document.createElement('div');
+        cmdLine.className = 'line';
+        cmdLine.style.marginTop = '24px';
+        cmdLine.innerHTML = `<span class="prompt">guest@agentic<span class="path">:~</span>$</span> <span class="cmd">cat ${filename}</span>`;
+        contentArea.appendChild(cmdLine);
+
+        // Create output lines
+        content.split('\n').forEach(line => {
+          const div = document.createElement('div');
+          div.className = 'line output';
+          // Check for links in markdown format [text](url)
+          const linkified = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+          // Check for plain URLs
+          const urlified = linkified.replace(/(^|\s)(https?:\/\/[^\s]+)/g, '$1<a href="$2">$2</a>');
+          div.innerHTML = urlified;
+          contentArea.appendChild(div);
+        });
+      });
+    }
+
+    function enterInputMode() {
+      terminalState.inputMode = true;
+      if (cursorElement) cursorElement.classList.add('typing');
+    }
+
+    function exitInputMode() {
+      terminalState.inputMode = false;
+      if (cursorElement) cursorElement.classList.remove('typing');
+    }
+
+    function updateInputDisplay() {
+      if (inputSpan) inputSpan.textContent = terminalState.currentInput;
+      scrollToBottom();
+    }
+
+    function scrollToBottom() {
+      if (terminalBody) terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function executeCommand(cmd) {
+      const trimmed = cmd.trim();
+      if (!trimmed) return;
+
+      terminalState.commandHistory.push(trimmed);
+      terminalState.historyIndex = terminalState.commandHistory.length;
+
+      const parts = trimmed.split(/\s+/);
+      const command = parts[0].toLowerCase();
+      const args = parts.slice(1);
+
+      let output = '';
+      let isError = false;
+
+      switch (command) {
+        case 'ls':
+          output = AVAILABLE_FILES.join('  ');
+          break;
+
+        case 'cat':
+          if (args.length === 0) {
+            output = 'Usage: cat <filename>';
+            isError = true;
+          } else {
+            const filename = args[0];
+            if (FILE_CONTENTS[filename]) {
+              output = FILE_CONTENTS[filename];
+            } else {
+              output = `cat: ${filename}: No such file`;
+              isError = true;
+            }
+          }
+          break;
+
+        case 'clear':
+          clearTerminal();
+          return;
+
+        default:
+          output = UNKNOWN_COMMAND_RESPONSES[
+            Math.floor(Math.random() * UNKNOWN_COMMAND_RESPONSES.length)
+          ];
+          isError = true;
+      }
+
+      addOutput(trimmed, output, isError);
+    }
+
+    function addOutput(command, output, isError) {
+      const inputLine = document.querySelector('.input-line');
+      if (!inputLine) return;
+
+      // Create command line
+      const cmdLine = document.createElement('div');
+      cmdLine.className = 'line';
+      cmdLine.innerHTML = `<span class="prompt">guest@agentic<span class="path">:~</span>$</span> <span class="cmd">${escapeHtml(command)}</span>`;
+
+      // Create output lines
+      const outputLines = output.split('\n').map(line => {
+        const div = document.createElement('div');
+        div.className = 'line output' + (isError ? ' cmd-error' : '');
+        div.textContent = line;
+        return div;
+      });
+
+      // Insert before input line
+      inputLine.parentNode.insertBefore(cmdLine, inputLine);
+      outputLines.forEach(el => inputLine.parentNode.insertBefore(el, inputLine));
+
+      // Clear input
+      terminalState.currentInput = '';
+      updateInputDisplay();
+      scrollToBottom();
+    }
+
+    function clearTerminal() {
+      const inputLine = document.querySelector('.input-line');
+      if (!inputLine || !terminalBody) return;
+
+      // Remove dynamically added lines (keep original content)
+      const dynamicLines = terminalBody.querySelectorAll('.line:not(.input-line)');
+      dynamicLines.forEach(line => {
+        if (!line.closest('.original-content')) {
+          // Only remove lines added after page load (crude heuristic: no original markup)
+        }
+      });
+
+      terminalState.currentInput = '';
+      updateInputDisplay();
+    }
+
+    // Keyboard handler
+    document.addEventListener('keydown', (e) => {
+      // Skip if focused on an actual input element
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'Escape') {
+        exitInputMode();
+        terminalState.currentInput = '';
+        updateInputDisplay();
+        return;
+      }
+
+      if (e.key === 'Enter') {
+        if (terminalState.currentInput.trim()) {
+          e.preventDefault();
+          executeCommand(terminalState.currentInput);
+          exitInputMode();
+        }
+        return;
+      }
+
+      if (e.key === 'Backspace') {
+        if (terminalState.currentInput.length > 0) {
+          e.preventDefault();
+          terminalState.currentInput = terminalState.currentInput.slice(0, -1);
+          updateInputDisplay();
+          if (terminalState.currentInput.length === 0) {
+            exitInputMode();
+          }
+        }
+        return;
+      }
+
+      // Arrow keys for history in input mode
+      if (terminalState.inputMode) {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (terminalState.historyIndex > 0) {
+            terminalState.historyIndex--;
+            terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex] || '';
+            updateInputDisplay();
+          }
+          return;
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (terminalState.historyIndex < terminalState.commandHistory.length - 1) {
+            terminalState.historyIndex++;
+            terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex] || '';
+          } else {
+            terminalState.historyIndex = terminalState.commandHistory.length;
+            terminalState.currentInput = '';
+          }
+          updateInputDisplay();
+          return;
+        }
+      }
+
+      // Printable characters
+      if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        enterInputMode();
+        terminalState.currentInput += e.key;
+        updateInputDisplay();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initTerminal);
+  </script>
 </body>
 </html>
