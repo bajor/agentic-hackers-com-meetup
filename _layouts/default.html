@@ -196,7 +196,7 @@
       <div class="terminal-header">
         <span class="terminal-title">guest@agentic: ~</span>
         <div class="terminal-controls">
-          <button class="terminal-btn">─</button>
+          <button class="terminal-btn minimize">─</button>
           <button class="terminal-btn">□</button>
           <button class="terminal-btn close">✕</button>
         </div>
@@ -276,6 +276,16 @@
 
       // Render initial content from ACTIVE_FILES
       renderInitialContent();
+
+      // Terminal button handlers (minimize and close both hide terminal)
+      const closeBtn = document.querySelector('.terminal-btn.close');
+      const minimizeBtn = document.querySelector('.terminal-btn.minimize');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', hideTerminal);
+      }
+      if (minimizeBtn) {
+        minimizeBtn.addEventListener('click', hideTerminal);
+      }
     }
 
     function renderInitialContent() {
@@ -367,10 +377,6 @@
           }
           break;
 
-        case 'clear':
-          clearTerminal();
-          return;
-
         default:
           output = UNKNOWN_COMMAND_RESPONSES[
             Math.floor(Math.random() * UNKNOWN_COMMAND_RESPONSES.length)
@@ -408,26 +414,51 @@
       scrollToBottom();
     }
 
-    function clearTerminal() {
-      const inputLine = document.querySelector('.input-line');
-      if (!inputLine || !terminalBody) return;
+    // Terminal visibility functions
+    function hideTerminal() {
+      const terminalWrapper = document.querySelector('.terminal-wrapper');
+      if (terminalWrapper) {
+        terminalWrapper.style.display = 'none';
+      }
+    }
 
-      // Remove dynamically added lines (keep original content)
-      const dynamicLines = terminalBody.querySelectorAll('.line:not(.input-line)');
-      dynamicLines.forEach(line => {
-        if (!line.closest('.original-content')) {
-          // Only remove lines added after page load (crude heuristic: no original markup)
-        }
-      });
+    function showTerminalFresh() {
+      const terminalWrapper = document.querySelector('.terminal-wrapper');
+      if (terminalWrapper) {
+        terminalWrapper.style.display = '';
+      }
 
+      // Clear all output (initial cats and command history)
+      const dynamicContent = document.getElementById('dynamic-content');
+      if (dynamicContent) {
+        dynamicContent.innerHTML = '';
+      }
+
+      // Remove any command output lines (but keep input line)
+      if (terminalBody) {
+        const outputLines = terminalBody.querySelectorAll('.line:not(.input-line)');
+        outputLines.forEach(line => line.remove());
+      }
+
+      // Reset terminal state
       terminalState.currentInput = '';
+      terminalState.commandHistory = [];
+      terminalState.historyIndex = -1;
       updateInputDisplay();
+      exitInputMode();
     }
 
     // Keyboard handler
     document.addEventListener('keydown', (e) => {
       // Skip if focused on an actual input element
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      // Ctrl+Alt+T: Show terminal fresh
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 't') {
+        e.preventDefault();
+        showTerminalFresh();
+        return;
+      }
 
       if (e.key === 'Escape') {
         exitInputMode();
