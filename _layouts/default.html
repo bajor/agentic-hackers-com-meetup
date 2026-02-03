@@ -492,29 +492,31 @@
         return;
       }
 
-      // Arrow keys for history in input mode
-      if (terminalState.inputMode) {
-        if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          if (terminalState.historyIndex > 0) {
-            terminalState.historyIndex--;
-            terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex] || '';
-            updateInputDisplay();
-          }
-          return;
-        }
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (terminalState.historyIndex < terminalState.commandHistory.length - 1) {
-            terminalState.historyIndex++;
-            terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex] || '';
-          } else {
-            terminalState.historyIndex = terminalState.commandHistory.length;
-            terminalState.currentInput = '';
-          }
+      // Arrow keys for history navigation
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (terminalState.commandHistory.length > 0 && terminalState.historyIndex > 0) {
+          terminalState.historyIndex--;
+          terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex];
+          enterInputMode();
           updateInputDisplay();
-          return;
         }
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (terminalState.historyIndex < terminalState.commandHistory.length - 1) {
+          terminalState.historyIndex++;
+          terminalState.currentInput = terminalState.commandHistory[terminalState.historyIndex];
+          enterInputMode();
+          updateInputDisplay();
+        } else if (terminalState.historyIndex < terminalState.commandHistory.length) {
+          terminalState.historyIndex = terminalState.commandHistory.length;
+          terminalState.currentInput = '';
+          exitInputMode();
+          updateInputDisplay();
+        }
+        return;
       }
 
       // Printable characters
